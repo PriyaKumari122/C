@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main() {
+    int ticket_number;
+    time_t current_time;
+    struct tm * time_info;
+    char time_string[9];
+
+    // Generate random ticket number
+    srand(time(NULL));
+    ticket_number = rand() % 1000000;
+
+    // Get current time
+    current_time = time(NULL);
+    time_info = localtime(&current_time);
+
+    // Format time string
+    strftime(time_string, sizeof(time_string), "%H:%M:%S", time_info);
+
+    // Print ticket information
+    printf("------------------------------\n");
+    printf("   E-Ticket for Bus Journey   \n");
+    printf("------------------------------\n");
+    printf("Ticket Number: %d\n", ticket_number);
+    printf("Date: %02d-%02d-%04d\n", time_info->tm_mday, time_info->tm_mon+1, time_info->tm_year+1900);
+    printf("Time: %s\n", time_string);
+    printf("------------------------------\n");
+
+    return 0;
+}
